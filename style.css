@@ -1,0 +1,425 @@
+/* design tokens */
+:root {
+    --background: #ffffff;
+    --accent: #000000;
+    --body: #000000;
+    --sub: #4f4f4f;
+    --highlight: #e0e0e0;
+    --glass-bg: rgba(0, 0, 0, 0.03);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --spacing: 8px;
+    --spacing-2: 16px;
+    --spacing-3: 24px;
+    --spacing-4: 32px;
+    --weight-body: 400;
+    --weight-accent: 500;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #000000;
+        --accent: #e9e9e9;
+        --body: #a2a2a2;
+        --sub: #6e6e6e;
+        --highlight: #222222;
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --glass-border: rgba(255, 255, 255, 0.08);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--glass-border) transparent;
+    scrollbar-gutter: stable;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--sub);
+    opacity: 0.3;
+    border-radius: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter";
+    background: var(--background);
+    color: var(--accent);
+    font-weight: var(--weight-body);
+    cursor: default;
+}
+
+::selection {
+    background: var(--highlight);
+}
+
+a {
+    color: inherit;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+button {
+    font-family: "Inter";
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:focus-visible {
+    outline: 1px solid var(--sub);
+    outline-offset: 2px;
+}
+
+.glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    transition: filter 0.2s;
+}
+
+/* site-wide subtle starfield background */
+.starfield {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--sub);
+    animation: star-drift linear infinite alternate, star-twinkle ease-in-out infinite;
+}
+
+@keyframes star-drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(var(--drift-x, 20vw), var(--drift-y, 20vh)); }
+}
+
+@keyframes star-twinkle {
+    0%, 100% { opacity: var(--star-min, 0.1); }
+    50% { opacity: var(--star-max, 0.4); }
+}
+
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: clamp(28px, 6vw, 56px) clamp(20px, 4vw, 40px);
+}
+
+.page-title {
+    font-size: 26px;
+    font-weight: var(--weight-accent);
+    margin-bottom: var(--spacing-4);
+    color: var(--accent);
+}
+
+/* popup is smaller, so everything a bit tighter */
+.popup {
+    width: 320px;
+}
+
+.popup .page {
+    padding: var(--spacing-3) 20px 20px;
+}
+
+.popup .page-title {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-3);
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    transition: color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+}
+
+.icon-btn:not(:disabled):hover {
+    color: var(--accent);
+    background: var(--highlight);
+}
+
+.icon-btn:not(:disabled):active {
+    transform: scale(0.9);
+}
+
+.icon-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.icon-btn.done {
+    color: var(--accent);
+    opacity: 1;
+    animation: check-pop 0.3s ease;
+}
+
+@keyframes check-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.icon-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.options {
+    border-radius: var(--border-radius-lg);
+    padding: 4px var(--spacing-2);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-2);
+    padding: 12px 0;
+}
+
+/* lines only between visible rows, otherwise the hidden timer row leaves one behind */
+.row + .row:not([hidden]) {
+    border-top: 1px solid var(--glass-border);
+}
+
+.row-end {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing);
+}
+
+.row-value {
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+}
+
+.row .icon-btn {
+    width: 28px;
+    height: 28px;
+    margin: -4px -6px -4px 0;
+}
+
+.row-label {
+    font-size: 14px;
+    color: var(--body);
+}
+
+.section-label {
+    margin: var(--spacing-3) 0 var(--spacing) 4px;
+    font-size: 12px;
+    color: var(--sub);
+}
+
+.section-label:first-of-type {
+    margin-top: 0;
+}
+
+/* info icons and tooltip */
+.label-line {
+    min-width: 0;
+}
+
+.info {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    vertical-align: -3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sub);
+    opacity: 0.6;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.info:hover,
+.info:focus-visible {
+    opacity: 1;
+    color: var(--accent);
+}
+
+.info svg {
+    width: 14px;
+    height: 14px;
+}
+
+.info.warn {
+    opacity: 1;
+    color: var(--accent);
+}
+
+
+
+.tooltip {
+    position: fixed;
+    z-index: 10;
+    max-width: 240px;
+    padding: 8px 10px;
+    border-radius: var(--border-radius);
+    background: var(--background);
+    border: 1px solid var(--glass-border);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--body);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s;
+}
+
+.tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.toggle {
+    width: 36px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    background: var(--glass-bg);
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.toggle.on {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--sub);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.toggle.on::after {
+    transform: translateX(16px);
+    background: var(--background);
+}
+
+.segmented {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border-radius: var(--border-radius);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    flex-shrink: 0;
+}
+
+.segmented button {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--sub);
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.segmented button:hover {
+    color: var(--accent);
+}
+
+.segmented button.active {
+    background: var(--accent);
+    color: var(--background);
+}
+
+.about {
+    padding: var(--spacing-2);
+}
+
+.about-text {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--sub);
+}
+
+/* same look as code in my blog posts */
+code {
+    font-family: "Inter";
+    font-size: 12px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--body);
+}
+
+.text-link {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--glass-border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.text-link:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* footer credit */
+.made-by {
+    display: block;
+    margin-top: var(--spacing-3);
+    text-align: center;
+    font-size: 13px;
+    color: var(--sub);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.made-by:hover {
+    color: var(--accent);
+}

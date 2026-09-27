@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History Cleaner settings</title>
+</head>
+<body>
+
+<div class="starfield" id="starfield"></div>
+
+<div class="page">
+    <h1 class="page-title">History Cleaner</h1>
+
+    <p class="section-label">what gets cleared</p>
+    <div class="options glass">
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">browsing history</span>
+                <button class="info" type="button" data-tip="every page you visited, plus the address bar suggestions that come from it."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="browsing history" data-type="history"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">cookies and other site data</span>
+                <button class="info warn" type="button" data-tip="not recommended. removes cookies, local storage and offline data of every website, so you get logged out almost everywhere and sites forget your preferences."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /><path d="M12 16h.01" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="cookies and other site data" data-type="siteData"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">cached images and files</span>
+                <button class="info" type="button" data-tip="saved copies of images and files from websites. pages load a little slower the first time after clearing."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="cached images and files" data-type="cache"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">download history</span>
+                <button class="info" type="button" data-tip="the entries on your downloads page. the downloaded files themselves stay on your computer."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="download history" data-type="downloads"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">autofill form data</span>
+                <button class="info" type="button" data-tip="saved entries for text fields, like names or addresses. saved passwords are never touched."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="autofill form data" data-type="formData"></button>
+        </div>
+    </div>
+
+    <p class="section-label">about this extension</p>
+    <div class="options glass about">
+        <p class="about-text">History Cleaner never sends anything anywhere. there's no analytics, no tracking and no account. it only asks chromium for four permissions, <code>history</code>, <code>browsingData</code>, <code>alarms</code> and <code>storage</code>, and none of them can read the content of the pages you visit. your settings are saved with <code>chrome.storage.local</code>, so they stay on this device and are never synced. the source code is public on <a class="text-link" href="https://github.com/chrissitxt/chrissi-history-cleaner" target="_blank" rel="noopener noreferrer">github</a>.</p>
+    </div>
+
+    <a class="made-by" href="https://chrissitxt.me" target="_blank" rel="noopener noreferrer">made by chrissi</a>
+</div>
+
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+
+<script type="module" src="options.js"></script>
+</body>
+</html>

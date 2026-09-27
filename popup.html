@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<title>History Cleaner</title>
+</head>
+<body class="popup">
+
+<div class="starfield" id="starfield"></div>
+
+<div class="page">
+    <div class="page-header">
+        <h1 class="page-title">History Cleaner</h1>
+        <button class="icon-btn" id="openSettings" type="button" aria-label="settings"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg></button>
+    </div>
+
+    <div class="options glass">
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">pause history</span>
+                <button class="info" type="button" data-tip="every new visit gets deleted the moment it's saved, since chromium can't be told to stop recording. your older history stays untouched."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="pause history" data-setting="pauseHistory"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">clear on startup</span>
+                <button class="info" type="button" data-tip="clears the selected data every time the browser opens. extensions can't act while the browser is closing, so this is the closest thing to clearing on close. tabs restored from your last session show up in your history again afterwards."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <button class="toggle" type="button" role="switch" aria-checked="false" aria-label="clear on startup" data-setting="clearOnStartup"></button>
+        </div>
+        <div class="row">
+            <span class="label-line">
+                <span class="row-label">auto clear</span>
+                <button class="info" type="button" data-tip="clears the selected data every 2, 4 or 8 hours. the countdown only runs while the browser is open and starts over every time you restart it."><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </span>
+            <div class="segmented" role="group" aria-label="auto clear interval">
+                <button type="button" aria-pressed="false" data-hours="0">off</button>
+                <button type="button" aria-pressed="false" data-hours="2">2h</button>
+                <button type="button" aria-pressed="false" data-hours="4">4h</button>
+                <button type="button" aria-pressed="false" data-hours="8">8h</button>
+            </div>
+        </div>
+        <div class="row" id="timerRow" hidden>
+            <span class="label-line">
+                <span class="row-label">next clear in</span>
+            </span>
+            <span class="row-value" id="countdown"></span>
+        </div>
+        <div class="row">
+            <span class="row-label">last cleared</span>
+            <span class="row-end">
+                <span class="row-value" id="lastCleared"></span>
+                <button class="icon-btn" id="clearNow" type="button" aria-label="clear now"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
+            </span>
+        </div>
+    </div>
+
+    <a class="made-by" href="https://chrissitxt.me" target="_blank" rel="noopener noreferrer">made by chrissi</a>
+</div>
+
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+
+<script type="module" src="popup.js"></script>
+</body>
+</html>
