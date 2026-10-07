@@ -1,51 +1,48 @@
 # History Cleaner
 
-a lightweight chromium extension that pauses your browsing history and clears browsing data automatically.
+A lightweight Chromium extension that pauses your browsing history and clears browsing data automatically.
 
-## what it does
+## What it does
 
-- pause history: every new visit gets deleted the moment it's recorded
-- clear on startup: wipes the selected data every time the browser opens
-- auto clear: every 2, 4 or 8 hours, with a live countdown in the popup
-- choose what gets cleared in the settings page: browsing history, cookies and other site data, cached images and files, download history, autofill form data
+- Pause history: every new visit gets deleted the moment it's recorded
+- Clear on startup: wipes the selected data every time the browser opens
+- Auto clear: every 2, 4 or 8 hours, with a live countdown in the popup
+- Choose what gets cleared in the settings page: browsing history, cookies and other site data, cached images and files, download history, autofill form data
 
-## good to know
+## Good to know
 
-- chromium doesn't let extensions stop history from being written, so pausing works by deleting each visit right after it happens
-- extensions get no reliable signal when the browser closes, so "on close" happens on the next start instead
-- the auto clear timer only runs while the browser is open and starts over after every restart
-- tabs restored from your last session create new history entries after the startup clear
-- clearing cookies and other site data logs you out almost everywhere, it's marked as not recommended
-- site settings can't be cleared by extensions, chromium only allows that from its own settings page
-- saved passwords are never touched
-- if sync is on, deleted history can also disappear from your other synced devices
+- Chromium doesn't let extensions stop history from being written, so pausing works by deleting each visit right after it happens
+- Extensions get no reliable signal when the browser closes, so "on close" happens on the next start instead
+- The auto clear timer only runs while the browser is open and starts over after every restart
+- Tabs restored from your last session create new history entries after the startup clear
+- Clearing cookies and other site data logs you out almost everywhere, it's marked as not recommended
+- Site settings can't be cleared by extensions, Chromium only allows that from its own settings page
+- Saved passwords are never touched
+- If sync is on, deleted history can also disappear from your other synced devices
 
-## privacy
+## Privacy
 
-- the extension never sends anything anywhere. no analytics, no tracking, no accounts
-- it only asks for `history`, `browsingData`, `alarms` and `storage`, none of which can read the content of the pages you visit
-- settings are saved with `chrome.storage.local`, which is never synced
-- the one exception: the popup and the settings page load inter from google fonts, which means google sees your ip address, nothing about your browsing
+- The extension never sends anything anywhere. No analytics, no tracking, no accounts
+- It only asks for `history`, `browsingData`, `alarms` and `storage`, none of which can read the content of the pages you visit
+- Settings are saved with `chrome.storage.local`, which is never synced
 
-## install
+## Install
 
-1. download this repo (code, then download zip) and unzip it, or clone it
-2. open `chrome://extensions` and turn on developer mode
-3. click "load unpacked" and pick the folder
+1. Download this repo (Code, then Download ZIP) and unzip it, or clone it
+2. Open `chrome://extensions` and turn on Developer mode
+3. Click "Load unpacked" and pick the folder
 
-to update, download the new version, replace the folder and hit the reload icon on the extension in `chrome://extensions`. your settings stay.
+To update, download the new version, replace the folder and hit the reload icon on the extension in `chrome://extensions`. Your settings stay.
 
-works in any chromium browser (chrome, brave, edge, helium, ...)
+Works in any Chromium browser (Chrome, Brave, Edge, Helium, ...)
 
-i'm planning to publish it on the chrome web store and other extension stores, until then it has to be loaded unpacked like this
-
-## permissions
+## Permissions
 
 - `history`: to delete visits while paused
 - `browsingData`: to clear the selected data
 - `alarms`: for the auto clear timer
 - `storage`: to remember your settings
 
-## license
+## License
 
-mit, see [LICENSE](LICENSE)
+MIT, see [LICENSE](LICENSE)
