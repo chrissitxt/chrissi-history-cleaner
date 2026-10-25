@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chrissi's History Cleaner Settings</title>
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main>
+    <h1 style="--n:0">chrissi's History Cleaner</h1>
+
+    <div class="section" style="--n:1">
+        <p class="sub">What gets cleared</p>
+        <div class="options">
+            <div class="row">
+                <label><input type="checkbox" data-type="history"> Browsing history</label>
+                <button class="info" type="button" data-tip="Every page you visited, plus the address bar suggestions that come from it."><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </div>
+            <div class="row">
+                <label><input type="checkbox" data-type="siteData"> Cookies and other site data</label>
+                <button class="info warn" type="button" data-tip="Not recommended. Removes cookies, local storage and offline data of every website, so you get logged out almost everywhere and sites forget your preferences."><svg class="i" viewBox="0 0 24 24"><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" /><path d="M12 16h.01" /></svg></button>
+            </div>
+            <div class="row">
+                <label><input type="checkbox" data-type="cache"> Cached images and files</label>
+                <button class="info" type="button" data-tip="Saved copies of images and files from websites. Pages load a little slower the first time after clearing."><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </div>
+            <div class="row">
+                <label><input type="checkbox" data-type="downloads"> Download history</label>
+                <button class="info" type="button" data-tip="The entries on your downloads page. The downloaded files themselves stay on your computer."><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </div>
+            <div class="row">
+                <label><input type="checkbox" data-type="formData"> Autofill form data</label>
+                <button class="info" type="button" data-tip="Saved entries for text fields, like names or addresses. Saved passwords are never touched."><svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 9h.01" /><path d="M11 12h1v4h1" /></svg></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" style="--n:2">
+        <p class="sub">About</p>
+        <p class="about">chrissi's History Cleaner never sends anything anywhere. There's no analytics, no tracking and no account. It only asks Chromium for four permissions, <code>history</code>, <code>browsingData</code>, <code>alarms</code> and <code>storage</code>, and none of them can read the content of the pages you visit. Your settings are saved with <code>chrome.storage.local</code>, so they stay on this device and are never synced. The source code is public on <a href="https://github.com/chrissitxt/chrissi-history-cleaner" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+    </div>
+
+    <p class="sub credit" style="--n:3"><a href="https://chrissitxt.me">made by chrissi</a></p>
+</main>
+
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+
+<script type="module" src="options.js"></script>
+</body>
+</html>
