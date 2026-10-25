@@ -15,7 +15,7 @@ Deletes every visit while history is paused, and clears the data you choose on s
 
 ## How it works
 
-Pausing deletes every visit right after Chromium records it. Clearing uses the `browsingData` API and the timer uses `alarms`. Settings are saved with `chrome.storage.local`. Everything runs inside the browser.
+Pausing deletes every visit right after Chromium records it. Clearing uses the `browsingData` API and the timer uses `alarms`. Settings are saved with `chrome.storage.local`. Everything runs inside the browser and nothing is sent anywhere, see [PRIVACY.md](PRIVACY.md).
 
 ## Design
 
@@ -31,39 +31,17 @@ Design tokens, stone theme. Light and dark follow the system.
 | sub | `#686662` | `#817e7b` |
 | highlight | `#eae7e4` | `#292725` |
 
-## Good to know
-
-- Chromium doesn't let extensions stop history from being written, so pausing works by deleting each visit right after it happens
-- Extensions get no reliable signal when the browser closes, so "on close" happens on the next start instead
-- The auto clear timer only runs while the browser is open and starts over after every restart
-- Tabs restored from your last session create new history entries after the startup clear
-- Clearing cookies and other site data logs you out almost everywhere, it's marked as not recommended
-- Site settings can't be cleared by extensions, Chromium only allows that from its own settings page
-- Saved passwords are never touched
-- If sync is on, deleted history can also disappear from your other synced devices
-
-## Privacy
-
-- The extension never sends anything anywhere. No analytics, no tracking, no accounts
-- It only asks for `history`, `browsingData`, `alarms` and `storage`, none of which can read the content of the pages you visit
-- Settings are saved with `chrome.storage.local`, which is never synced
-
 ## Install
 
-1. Download this repo (Code, then Download ZIP) and unzip it, or clone it
+Get it from the [Chrome Web Store](https://chromewebstore.google.com/detail/imcojpkojoiecihnkhiajlccbecdbocp), or install it manually:
+
+1. Download the latest Release and unzip it
 2. Open `chrome://extensions` and turn on Developer mode
 3. Click "Load unpacked" and pick the folder
 
 To update, download the new version, replace the folder and hit the reload icon on the extension in `chrome://extensions`. Your settings stay.
 
 Works in any Chromium browser (Chrome, Brave, Edge, Helium, ...)
-
-## Permissions
-
-- `history`: to delete visits while paused
-- `browsingData`: to clear the selected data
-- `alarms`: for the auto clear timer
-- `storage`: to remember your settings
 
 ## A note on AI
 
